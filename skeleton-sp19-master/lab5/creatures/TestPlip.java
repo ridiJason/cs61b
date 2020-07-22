@@ -33,9 +33,10 @@ public class TestPlip {
     @Test
     public void testReplicate() {
         // TODO
+
     }
 
-    //@Test
+    @Test
     public void testChoose() {
 
         // No empty adjacent spaces; stay.

@@ -10,6 +10,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
 
+import static huglife.HugLifeUtils.randomEntry;
+
+
 /**
  * An implementation of a motile pacifist photosynthesizer.
  *
@@ -57,8 +60,10 @@ public class Plip extends Creature {
      * that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
-        return color(r, g, b);
+        r = 99;
+        b = 76;
+        g = (int)(96 * energy + 63);
+        return color(r,g,b);
     }
 
     /**
@@ -75,6 +80,10 @@ public class Plip extends Creature {
      */
     public void move() {
         // TODO
+        energy = energy - 0.15;
+        if(energy < 0){
+            energy = 0;
+        }
     }
 
 
@@ -83,6 +92,10 @@ public class Plip extends Creature {
      */
     public void stay() {
         // TODO
+        energy = energy + 0.2;
+        if(energy > 2){
+            energy = 2;
+        }
     }
 
     /**
@@ -91,7 +104,14 @@ public class Plip extends Creature {
      * Plip.
      */
     public Plip replicate() {
-        return this;
+        energy = 0.5 * energy;
+        Plip sonP = new Plip(energy);
+        return sonP;
+    }
+
+    @Override
+    public String name(){
+        return super.name();
     }
 
     /**
@@ -108,23 +128,31 @@ public class Plip extends Creature {
      * for an example to follow.
      */
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
-        // Rule 1
+
         Deque<Direction> emptyNeighbors = new ArrayDeque<>();
         boolean anyClorus = false;
         // TODO
         // (Google: Enhanced for-loop over keys of NEIGHBORS?)
         // for () {...}
-
-        if (false) { // FIXME
-            // TODO
+        for(Direction key:neighbors.keySet()){
+            if(neighbors.get(key).name().equals("clorus")){
+                anyClorus = true;
+            }else if(neighbors.get(key).name().equals("empty")){
+                emptyNeighbors.add(key);
+            }
         }
 
-        // Rule 2
-        // HINT: randomEntry(emptyNeighbors)
 
-        // Rule 3
+        // Rule 1
+        if(emptyNeighbors.size()==0){
+            return new Action(Action.ActionType.STAY);
+        }else if(energy >= 1){ //Rule 2
+            return new Action(Action.ActionType.REPLICATE,randomEntry(emptyNeighbors));
+        }else if(anyClorus && Math.random() >= 0.5){ //Rule 3
+            return new Action(Action.ActionType.MOVE,randomEntry(emptyNeighbors));
+        }else { //Rule 4
+            return new Action(Action.ActionType.STAY);
+        }
 
-        // Rule 4
-        return new Action(Action.ActionType.STAY);
     }
 }
