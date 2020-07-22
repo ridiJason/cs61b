@@ -16,6 +16,10 @@ public class GuitarString {
         //       cast the result of this division operation into an int. For
         //       better accuracy, use the Math.round() function before casting.
         //       Your buffer should be initially filled with zeros.
+        buffer = new ArrayRingBuffer<Double>((int)Math.round(SR / frequency));
+        for(int i = 0;i < buffer.capacity();i++){
+            buffer.enqueue(0.0);
+        }
     }
 
 
@@ -24,6 +28,11 @@ public class GuitarString {
         // TODO: Dequeue everything in buffer, and replace with random numbers
         //       between -0.5 and 0.5. You can get such a number by using:
         //       double r = Math.random() - 0.5;
+        for(int i = 0;i < buffer.capacity();i++){
+            buffer.dequeue();
+            double r = Math.random() - 0.5;
+            buffer.enqueue(r);
+        }
         //
         //       Make sure that your random numbers are different from each
         //       other.
@@ -36,12 +45,15 @@ public class GuitarString {
         // TODO: Dequeue the front sample and enqueue a new sample that is
         //       the average of the two multiplied by the DECAY factor.
         //       Do not call StdAudio.play().
+        double deOne = buffer.dequeue();
+        double enOne = deOne * buffer.peek() * DECAY * 0.5;
+        buffer.enqueue(enOne);
     }
 
     /* Return the double at the front of the buffer. */
     public double sample() {
         // TODO: Return the correct thing.
-        return 0;
+        return buffer.peek();
     }
 }
     // TODO: Remove all comments that say TODO when you're done.
