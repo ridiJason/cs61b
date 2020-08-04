@@ -67,7 +67,7 @@ public class NaiveMinPQ<T> implements ExtrinsicMinPQ<T> {
         return items.indexOf(new PriorityNode(elem, 0));
     }
 
-    private class PriorityNode implements Comparable<PriorityNode> {
+    class PriorityNode implements Comparable<PriorityNode> {
         private T item;
         private double priority;
 
