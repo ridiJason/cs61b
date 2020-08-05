@@ -55,7 +55,23 @@ public class TestMyTrieSet {
     }
 
     public static void main(String[] args) {
-        jh61b.junit.TestRunner.runTests(TestMyTrieSet.class);
+      //  jh61b.junit.TestRunner.runTests(TestMyTrieSet.class);
+
+        String[] saStrings = new String[]{"same", "sam", "sad", "sap"};
+        String[] otherStrings = new String[]{"a", "awls", "hello"};
+
+        MyTrieSet t = new MyTrieSet();
+        for (String s: saStrings) {
+            t.add(s);
+        }
+        for (String s: otherStrings) {
+            t.add(s);
+        }
+
+        List<String> keys = t.keysWithPrefix("sa");
+        for (String s : keys){
+          System.out.println(s);
+        }
     }
 
 
