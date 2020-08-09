@@ -24,8 +24,34 @@ public class SeparableEnemySolver {
      */
     public boolean isSeparable() {
         // TODO: Fix me
-        return false;
+        HashMap<String,Integer> colors = new HashMap<>();
+        for (String label : g.labels()){
+            if (!colors.containsKey(label)){
+                if (!DFS(label,colors,1)){
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
+
+    public boolean DFS(String label,HashMap<String,Integer> colors,int c){
+        if (colors.containsKey(label)){
+            return colors.get(label) == c;
+       }
+        colors.put(label,c);
+        for (String neighbor : g.neighbors(label)){
+            if (!DFS(neighbor,colors,3-c)){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+
+
 
 
     /* HELPERS FOR READING IN CSV FILES. */
