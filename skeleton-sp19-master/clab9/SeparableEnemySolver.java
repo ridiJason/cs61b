@@ -5,6 +5,7 @@ import java.util.*;
 public class SeparableEnemySolver {
 
     Graph g;
+    HashMap<String,Integer> colors = new HashMap<>();
 
     /**
      * Creates a SeparableEnemySolver for a file with name filename. Enemy
@@ -24,30 +25,30 @@ public class SeparableEnemySolver {
      */
     public boolean isSeparable() {
         // TODO: Fix me
-        HashMap<String,Integer> colors = new HashMap<>();
+
         for (String label : g.labels()){
             if (!colors.containsKey(label)){
-                if (!DFS(label,colors,1)){
+                if (!DFS(label,1)){
+                   return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean DFS(String label,int c) {
+
+        colors.put(label, c);
+        for (String neighbor : g.neighbors(label)) {
+            if (!colors.containsKey(neighbor)) {
+                DFS(neighbor,  3 - c);
+            }else{
+                if (colors.get(neighbor) == c){
                     return false;
                 }
             }
         }
-
         return true;
-    }
-
-    public boolean DFS(String label,HashMap<String,Integer> colors,int c){
-        if (colors.containsKey(label)){
-            return colors.get(label) == c;
-       }
-        colors.put(label,c);
-        for (String neighbor : g.neighbors(label)){
-            if (!DFS(neighbor,colors,3-c)){
-                return false;
-            }
-        }
-        return true;
-
     }
 
 

@@ -55,6 +55,7 @@ public class SeparableEnemySolverTests {
         assertEquals(false, solver.isSeparable());
     }
 
+
     @Test
     public void input4() throws FileNotFoundException {
         SeparableEnemySolver solver = new SeparableEnemySolver("input/party4");
