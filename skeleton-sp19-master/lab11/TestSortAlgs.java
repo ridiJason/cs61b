@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Queue;
 
 import org.junit.Test;
@@ -6,11 +7,45 @@ public class TestSortAlgs {
 
     @Test
     public void testQuickSort() {
+        Queue<Integer> queue1 = new Queue<>();
+        queue1.enqueue(1);
+        queue1.enqueue(3);
+        queue1.enqueue(2);
+        queue1.enqueue(7);
+        System.out.println(isSorted(queue1));
+
+        Queue<Integer> queue2 = new Queue<>();
+        queue2.enqueue(1);
+        queue2.enqueue(3);
+        queue2.enqueue(4);
+        queue2.enqueue(7);
+        System.out.println(isSorted(queue2));
+
 
     }
 
     @Test
     public void testMergeSort() {
+        Queue<Integer> queue1 = new Queue<>();
+        queue1.enqueue(0);
+        queue1.enqueue(2);
+        queue1.enqueue(8);
+        queue1.enqueue(9);
+
+
+
+      //  System.out.println(isSorted(queue1));
+
+        Queue<Integer> queue2 = new Queue<>();
+        queue2.enqueue(8);
+        queue2.enqueue(3);
+        queue2.enqueue(1);
+        queue2.enqueue(7);
+        //System.out.println(isSorted(queue2));
+
+        System.out.println(MergeSort.mergeSort(queue2));
+
+
 
     }
 
