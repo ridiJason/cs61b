@@ -10,8 +10,17 @@ import java.util.List;
  */
 public class BnBSolver {
 
+
+
+
+
+
     public BnBSolver(List<Bear> bears, List<Bed> beds) {
         // TODO: Fix me.
+        QuickSort.quickSort(bears);
+        QuickSort.quickSort(beds);
+
+
     }
 
     /**
@@ -19,6 +28,8 @@ public class BnBSolver {
      */
     public List<Bear> solvedBears() {
         // TODO: Fix me.
+
+
         return null;
     }
 
