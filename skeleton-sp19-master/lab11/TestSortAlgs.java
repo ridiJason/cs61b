@@ -12,14 +12,20 @@ public class TestSortAlgs {
         queue1.enqueue(3);
         queue1.enqueue(2);
         queue1.enqueue(7);
+      //  System.out.println(isSorted(queue1));
+
+
+        QuickSort.quickSort(queue1);
         System.out.println(isSorted(queue1));
+
+
 
         Queue<Integer> queue2 = new Queue<>();
         queue2.enqueue(1);
         queue2.enqueue(3);
         queue2.enqueue(4);
         queue2.enqueue(7);
-        System.out.println(isSorted(queue2));
+  //      System.out.println(isSorted(queue2));
 
 
     }
